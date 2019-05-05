@@ -20,7 +20,7 @@ namespace Wox.Plugin.CppRef
             List<Result> results = new List<Result>();
             string[] args = query.RawQuery.Split(' ');
             Type type;
-            string url = "https://zh.cppreference.com/mwiki/index.php?search=";
+            string url = "https://en.cppreference.com/mwiki/index.php?search=";
             if (args.Length >= 2)
             {
                 if (args[1].CompareTo("d") == 0)
@@ -59,7 +59,7 @@ namespace Wox.Plugin.CppRef
                 HtmlWeb html = new HtmlWeb();
                 HtmlDocument document = html.Load(url);
                 string title = document.DocumentNode.FirstChild.NextSibling.NextSibling.FirstChild.NextSibling.FirstChild.NextSibling.InnerText;
-                if (!title.Contains("搜索结果"))
+                if (!title.Contains("Search results"))
                 {
                     results.Add(new Result
                     {
@@ -92,7 +92,7 @@ namespace Wox.Plugin.CppRef
                     List<HtmlNode> nodes = GetAllSearchResults(search_results);
                     foreach (HtmlNode node in nodes)
                     {
-                        string direct_url = "https://zh.cppreference.com" + node.Attributes["href"].Value;
+                        string direct_url = "https://en.cppreference.com" + node.Attributes["href"].Value;
                         results.Add(new Result
                         {
                             Title = node.InnerText.Replace("&lt;", "<").Replace("&gt;", ">"),
